@@ -1,6 +1,6 @@
-FROM postgres:9.4.6
+FROM debian:wheezy
 
-RUN apt-get update && apt-get -y install wget ca-certificates s3cmd cron rsyslog
+RUN apt-get update && apt-get -y install wget ca-certificates s3cmd cron rsyslog postgresql-client-9.4
 
 RUN touch /var/log/cron.log
 
