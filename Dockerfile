@@ -12,6 +12,9 @@ RUN chmod 0644 /etc/rsyslog.conf
 ADD crontab /var/spool/cron/crontabs/root
 RUN chmod 0600 /var/spool/cron/crontabs/root
 
+RUN echo $PG_S3_BACKUP_PASSWORD > /root/.pgpass
+RUN chmod 0600 /root/.pgpass
+
 # Clean up after package manager
 RUN rm -rf /var/lib/apt/lists/*
 
