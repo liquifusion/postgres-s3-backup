@@ -1,6 +1,11 @@
-FROM phusion/baseimage:0.9.15
+FROM debian:wheezy
 
-RUN apt-get update && apt-get -y install wget ca-certificates s3cmd cron rsyslog postgresql-client-9.4
+RUN apt-get update && apt-get -y install wget ca-certificates s3cmd cron rsyslog
+
+# Use the postgresql repo to get version 9.4
+RUN echo 'deb http://apt.postgresql.org/pub/repos/apt/ wheezy-pgdg main' >> /etc/apt/sources.list \ 
+ && wget -O- -q https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
+RUN apt-get update && apt-get -y install postgresql-client-9.4
 
 RUN touch /var/log/cron.log
 
