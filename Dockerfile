@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM phusion/baseimage:0.9.15
 
 RUN apt-get update && apt-get -y install wget ca-certificates s3cmd cron rsyslog postgresql-client-9.4
 
