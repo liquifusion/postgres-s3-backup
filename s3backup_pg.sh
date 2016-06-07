@@ -10,7 +10,6 @@ TMP_FILE=/tmp/$RAND_STR.dump
 touch $TMP_FILE
 chmod 0600 $TMP_FILE
 COMMAND_ARGS=
-echo "pg_dump -h" $5 "-U" $2 $4 "-F t -f" $TMP_FILE
-pg_dump -h $5 -U $2 $4 -F t -f $TMP_FILE
-s3cmd --config /root/.s3cfg put $TMP_FILE s3://$4/$2.`/bin/date +%Y_%m_%d`.$RAND_STR.dump
+pg_dump -h $3 -U $1 $2 -F t -f $TMP_FILE
+s3cmd --config /root/.s3cfg put $TMP_FILE s3://$2/$1.`/bin/date +%Y_%m_%d`.$RAND_STR.dump
 rm $TMP_FILE
