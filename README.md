@@ -1,6 +1,6 @@
 # postgres-s3-backup
 
-Dockerized cron job to backup a Postgres database to Amazon S3 every day at midnight.
+Backup PostgreSQL to Amazon S3 using `pg_dump` within a Dockerized container.
 
 It expects the following environment variables to be set:
 
@@ -11,3 +11,15 @@ It expects the following environment variables to be set:
 -  `PG_S3_BACKUP_USER` - User of database to backup
 -  `PG_S3_BACKUP_PASSWORD` - Password used to login as `PG_S3_BACKUP_USER`
 -  `PG_S3_BACKUP_DB` - Name of database to backup
+
+Then schedule your hosting to run this command within the container at an interval of your choosing:
+
+```
+sh /root/db_backup.sh
+```
+
+## Configuring the container to do Cron itself
+
+The `Dockerfile` also contains an optional Dockerized cron job that runs the backup every day at midnight. Just
+un-comment the last `CMD` statement in the `Dockerfile` if you want for the container to handle the Cron itself
+without intervention from external hosting.
