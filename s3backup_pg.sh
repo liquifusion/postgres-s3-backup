@@ -9,7 +9,7 @@ RAND_STR=`cat /dev/urandom | head -c 30 | base64 | sed -e 's/+/_/g' -e 's/\\//-/
 TMP_FILE=/tmp/$RAND_STR.dump
 touch $TMP_FILE
 chmod 0600 $TMP_FILE
-COMMAND_ARGS="-h ".$5." -U ".$2." ".$4." -F t -f ".$TMP_FILE
+COMMAND_ARGS="-h" $5 "-U" $2 $4 "-F t -f" $TMP_FILE
 echo "pg_dump ".$COMMAND_ARGS
 pg_dump $COMMAND_ARGS
 s3cmd --config /root/.s3cfg put $TMP_FILE s3://$4/$2.`/bin/date +%Y_%m_%d`.$RAND_STR.dump
